@@ -14,6 +14,8 @@ sdl2main_dep = dependency('sdl2main', required: false)
 
 exe = executable('hanoi',
   'src/hanoi.cpp',
+  'src/HanoiState.cpp',
+  'src/DiskRod.cpp',
   dependencies: [
     sdl2_dep,
     sdl2main_dep,
