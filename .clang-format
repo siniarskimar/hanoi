@@ -12,4 +12,5 @@ MaxEmptyLinesToKeep: 2
 BraceWrapping:
   SplitEmptyFunction: false
 
+AlwaysBreakTemplateDeclarations: Yes
 
