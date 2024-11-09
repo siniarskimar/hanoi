@@ -1,7 +1,7 @@
 BasedOnStyle: LLVM
 IndentWidth: 4
 
-AlignEscapedNewlines: LeftWithLastLine
+AlignEscapedNewlines: Left
 AlignOperands: Align
 AlignTrailingComments:
   Kind: Never
