@@ -1,0 +1,15 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+
+AlignEscapedNewlines: LeftWithLastLine
+AlignOperands: Align
+AlignTrailingComments:
+  Kind: Never
+  OverEmptyLines: 0
+
+MaxEmptyLinesToKeep: 2
+
+BraceWrapping:
+  SplitEmptyFunction: false
+
+
