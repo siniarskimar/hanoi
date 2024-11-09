@@ -3,7 +3,8 @@ project('hanoi', 'cpp',
   default_options : [
     'warning_level=3',
     'default_library=static',
-    'cpp_std=c++17'
+    'cpp_std=c++17',
+    'werror=true'
   ]
 )
 
