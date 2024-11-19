@@ -69,7 +69,23 @@ class span {
 
 template <typename T>
 class span<T, 0> {
-    static_assert(false, "TODO: implement span with extent of 0");
+    template <typename Tp>
+    using is_compatible_array = std::is_convertible<Tp (*)[], T (*)[]>;
+
+  public:
+    using element_type = T;
+    using value_type = std::remove_cv_t<T>;
+    using size_type = size_t;
+    using pointer = T *;
+    using const_pointer = const T *;
+    using reference = T &;
+    using const_reference = const T &;
+
+    constexpr span() noexcept {}
+
+    constexpr pointer data() const noexcept { return nullptr; }
+    constexpr std::size_t size() const noexcept { return 0; }
+    constexpr bool empty() const noexcept { return size() == 0; }
 };
 
 template <typename T>
