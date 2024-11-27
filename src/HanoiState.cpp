@@ -10,7 +10,7 @@ HanoiState::HanoiState(size_t rod_count, size_t disk_count)
     }
 
     for (size_t disk_idx = 0; disk_idx < disk_count; disk_idx++) {
-        m_rods[0].push(disk_idx + 1);
+        m_rods[0].push(disk_count - disk_idx);
     }
 }
 
