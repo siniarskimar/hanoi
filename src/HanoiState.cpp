@@ -1,37 +1,17 @@
 #include "HanoiState.hpp"
-#include "defer.hpp"
 #include <stdexcept>
 
-using DiskRodAllocTraits = std::allocator_traits<HanoiState::DiskRodAllocator>;
 
 HanoiState::HanoiState(size_t rod_count, size_t disk_count)
-    : m_move_count(0), m_rod_count(rod_count), m_diskstack_alloc(),
-      m_rods(nullptr) {
-    m_rods = DiskRodAllocTraits::allocate(m_diskstack_alloc, rod_count);
+    : m_move_count(0), m_rod_count(rod_count), m_rods() {
 
-    size_t rod_idx = 0;
-    auto defer = Defer{[&]() {
-        while (rod_idx > 0) {
-            DiskRodAllocTraits::destroy(m_diskstack_alloc, &m_rods[rod_idx]);
-            rod_idx--;
-        }
-        DiskRodAllocTraits::deallocate(m_diskstack_alloc, m_rods, m_rod_count);
-    }};
-
-    while (rod_idx < rod_count) {
-        DiskRodAllocTraits::construct(m_diskstack_alloc, &m_rods[rod_idx],
-                                      disk_count);
-        rod_idx++;
+    for (size_t rod_idx = 0; rod_idx < rod_count; rod_idx++) {
+        m_rods.emplace_back(disk_count);
     }
 
-    defer.cancel();
-}
-
-HanoiState::~HanoiState() {
-    for (size_t rod_idx = 0; rod_idx < m_rod_count; rod_idx++) {
-        DiskRodAllocTraits::destroy(m_diskstack_alloc, &m_rods[m_rod_count]);
+    for (size_t disk_idx = 0; disk_idx < disk_count; disk_idx++) {
+        m_rods[0].push(disk_idx + 1);
     }
-    DiskRodAllocTraits::deallocate(m_diskstack_alloc, m_rods, m_rod_count);
 }
 
 bool HanoiState::isValidDiskMove(size_t source_rod, size_t dest_rod) {
