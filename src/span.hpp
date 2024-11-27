@@ -119,10 +119,10 @@ class span<T, dynamic_extent> {
     constexpr span(const span<T> &other) noexcept
         : m_ptr(other.m_ptr), m_len(other.len) {}
 
-    constexpr std::size_t size() const noexcept { return this->len; }
+    constexpr std::size_t size() const noexcept { return this->m_len; }
 
     constexpr reference operator[](std::size_t idx) const {
-        if (idx >= this->len) {
+        if (idx >= this->m_len) {
             throw std::out_of_range("span index out of range");
         }
         return this->m_ptr[idx];
